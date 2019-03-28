@@ -1,0 +1,76 @@
+<%: func WeaList(word model.Word, tip string,weaList []model.Weather,sList []model.News, bList []model.News, buffer *bytes.Buffer) %>
+
+<%~ "index.html" %>
+
+<%@ body { %>
+    <h2 style="margin: 0;padding-top: 20px;padding-bottom: 20px;background-color:#f3f5f0;text-align:center;color:#050602">ONE · 一个</h2>
+    <div style="text-align:center;padding-bottom: 8px;background-color:#f3f5f0;">
+         <img src="<%= word.ImgURL %>" style="width:100%;margin-top:0px;"  alt="">
+         <div style="margin:10px auto;width:85%;color:#5f5e5e;" ><%= word.Title %></div>
+    </div>
+    <h3 style="margin-top: 8px;margin-bottom: 20px;background-color:#75a4f2;text-align:center;color:white"><%= tip %></h3>
+    <div style="width:100%; margin-top: 20px;color:#5f5e5e;text-align:center;">
+        <span style="display:block;margin-top:15px;color:#676767;font-size:15px">近期天气预报</span>
+    <% for _, threeDaysData := range weaList { %>
+        <div style="display: flex;margin-top:5px;height: 30px;line-height: 30px;justify-content: space-around;align-items: center;">
+            <span style="width:15%; text-align:center;"><%= threeDaysData.Day %></span>
+            <div style="width:25%; text-align:center;">
+                <img style="height:26px;vertical-align:middle;" src='<%= threeDaysData.ImgUrl %>' alt="">
+                <span style="display:inline-block"><%= threeDaysData.Text %></span>
+            </div>
+            <span style="width:25%; text-align:center;"><%= threeDaysData.Temperature %></span>
+            
+            <% if (threeDaysData.PollutionLevel == "level_1") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#8fc31f; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>
+            <% }  %>
+            <% if (threeDaysData.PollutionLevel == "level_2") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#d7af0e; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>
+            <% }  %>
+            <% if (threeDaysData.PollutionLevel == "level_3") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#f39800; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>
+            <% }  %>
+            <% if (threeDaysData.PollutionLevel == "level_4") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#e2361a; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>
+            <% }  %>
+            <% if (threeDaysData.PollutionLevel == "level_5") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#5f52a0; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>
+            <% }  %>
+            <% if (threeDaysData.PollutionLevel == "level_6") { %>
+                <div style="width:35%; ">
+                        <span style="display:inline-block;padding:0 8px;line-height:25px;color:#631541; border-radius:15px; text-align:center;"><%= threeDaysData.Pollution %></span>
+                </div>    
+            <% }  %>
+            
+        </div>
+    <% } %>
+    <h3 style="margin-top: 20px;margin-bottom: 20px;background-color:#f85d00;color:white">Sina热搜</h3>
+    <% for index, news := range sList { %>
+        <% indexs := "Top" %>
+        <% if(index > 0) {indexs = strconv.Itoa(index)} %>
+        <div style="display: flex;margin-top:5px;height: 30px;line-height: 30px;justify-content: space-around;align-items: center;">
+            <p style="width:20%; color: #f26d5f;"><%= indexs %></p>
+            <a style="width:80%; text-decoration:none;color:#0078b6;text-align: left;" href="<%= news.Link %>"><%= news.Title %></a>
+        </div>
+        <div style="margin: 0px,20px; height: 0.5px; background-color:#f2f2f5;"></div>
+    <% } %>
+    <h3 style="margin-top: 20px;margin-bottom: 20px;background-color:#3385ff;color:white">Baidu热搜</h3>
+    <% for index, news := range bList { %>
+        <% indexs := strconv.Itoa(index + 1) %>
+        <div style="display: flex;margin-top:5px;height: 30px;line-height: 30px;justify-content: space-around;align-items: center;">
+            <p style="width:20%; color:red;"><%= indexs %></p>
+            <a style="width:80%; text-decoration:none;color:#3385ff;text-align: left;" href="<%= news.Link %>"><%= news.Title %></a>
+        </div>
+        <div style="margin: 0px,20px; height: 0.5px; background-color:#f2f2f5;"></div>
+    <% } %>
+    </div>
+<% } %>
