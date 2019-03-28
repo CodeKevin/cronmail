@@ -9,7 +9,6 @@
 ![image](https://github.com/CodeKevin/cronmail/blob/master/dance.gif?raw=true)
 
 ## 参考
-==============
 [Vincedream/NodeMail](https://github.com/Vincedream/NodeMail)  
 [PuerkitoBio/goquery](https://github.com/PuerkitoBio/goquery)  
 [go-gomail/gomail](https://github.com/go-gomail/gomail)  
